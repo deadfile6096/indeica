@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Frontier Times - 1873</title>
+    <link rel="icon" type="image/png" href="favicon/favicon.png">
+    <style>
+        /* Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Special+Elite&family=Spectral+SC:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Special Elite', cursive; /* Default body font */
+            color: #3a2d20; /* Dark brown for text */
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            
+            /* Реалистичный фон старой пожелтевшей газеты */
+            background-color: #f8f0d8; /* Более желтоватый цвет */
+            background-image: 
+                linear-gradient(to right, rgba(255,255,240,0.1) 0%, rgba(232,220,180,0.3) 20%, rgba(255,255,240,0.1) 40%, rgba(232,220,180,0.3) 60%, rgba(255,255,240,0.1) 80%),
+                linear-gradient(to bottom, rgba(255,255,240,0.1) 0%, rgba(232,220,180,0.2) 30%, rgba(255,255,240,0.1) 60%, rgba(232,220,180,0.2) 100%);
+            position: relative;
+            /* Добавление черной рамки вокруг страницы */
+            border-left: 2px solid #000;
+            border-right: 2px solid #000;
+            box-sizing: border-box;
+            max-width: 96%;
+            margin: 0 auto;
+        }
+        
+        /* Social Media Corner Styles */
+        .social-corner {
+            position: fixed;
+            top: 40px;
+            right: 80px;
+            z-index: 1000;
+        }
+        
+        .social-link {
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: scale(1.1);
+        }
+        
+        .social-icon {
+            width: 80px;
+            height: 80px;
+            filter: sepia(50%);
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+            border: 3px solid #8b4513;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: rgba(245, 222, 179, 0.3);
+        }
+        
+        .social-icon:hover {
+            opacity: 1;
+            filter: sepia(20%);
+        }
+        
+        /* Добавляем тонкую текстуру шума для имитации волокон бумаги */
+        
+        /* Добавляем эффект пятен и неравномерности старой бумаги */
+        body:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(218,200,160,0.4) 0%, rgba(0,0,0,0) 20%),
+                radial-gradient(circle at 90% 30%, rgba(218,200,160,0.3) 0%, rgba(0,0,0,0) 25%),
+                radial-gradient(circle at 30% 70%, rgba(218,200,160,0.4) 0%, rgba(0,0,0,0) 15%),
+                radial-gradient(circle at 70% 90%, rgba(218,200,160,0.3) 0%, rgba(0,0,0,0) 20%);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1920px; /* Optimized for wide screens, adjust as needed */
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Стилизация газетной рамки */
+        .newspaper-frame {
+            border-top: 3px solid #000;
+            border-bottom: 3px solid #000;
+            padding: 4px 0;
+            margin: 10px 0;
+            width: 100%;
+        }
+        
+        .newspaper-frame .thin-line {
+            height: 1px;
+            background-color: #000;
+            margin: 2px 0;
+        }
+        
+        /* Вертикальные линии по бокам страницы */
+        .vertical-lines {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 2%;
+            z-index: 1001;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .vertical-lines.left {
+            left: 0;
+            border-right: 1px solid #000;
+        }
+        
+        .vertical-lines.right {
+            right: 0;
+            border-left: 1px solid #000;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cinzel', serif; /* Or 'Playfair Display' */
+            color: #5d4037; /* Darker brown for headers */
+            text-align: center;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh; /* Увеличено до 100vh, чтобы занимало весь экран */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Центрирование по вертикали */
+            text-align: center;
+            padding: 0 20px 30px 20px;
+            border-bottom: none; /* Убрана нижняя граница, т.к. она будет на фото-баннере */
+        }
+
+        .newsletter-banner {
+            width: 100%;
+            margin: 0 0 30px 0; /* Remove top margin */
+            text-align: center;
+            padding-top: 20px; /* Add some padding inside the banner */
+        }
+        
+        /* Стили метаданных газеты */
+        .newspaper-metadata {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10%;
+            margin-bottom: 5px;
+            font-family: 'Spectral SC', serif;
+            font-size: 0.9rem;
+        }
+        
+        .issue-number {
+            text-align: left;
+        }
+        
+        .newspaper-price {
+            text-align: right;
+        }
+        
+        .newspaper-date {
+            font-family: 'Spectral SC', serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .newsletter-banner .line {
+            height: 2px;
+            background-color: #3a2d20;
+            margin: 5px 0;
+        }
+
+        .newsletter-banner .title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            padding: 0 15px;
+            color: #5d4037; /* Dark Brown */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .banner-icon {
+            height: 60px;
+            width: auto;
+            margin: 0 15px;
+            vertical-align: middle;
+            opacity: 0.9;
+        }
+
+        .newsletter-banner .dots {
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+            color: #3a2d20;
+            margin: 0;
+        }
+        
+        /* Navigation Styles */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 15px 0 25px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            font-family: 'Spectral SC', serif;
+            font-size: 1.1rem;
+            color: #5d4037;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+        }
+        
+        .nav-link:hover {
+            color: #8b4513;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #8b4513;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .hero h1 {
+            font-size: 4rem; /* Larger for main title */
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border: 3px double #5d4037;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            font-family: 'Spectral SC', serif;
+            margin-bottom: 30px;
+            color: #795548; /* Brown */
+        }
+
+        .scroll-button {
+            padding: 12px 25px;
+            background-color: #8b4513; /* SaddleBrown */
+            color: #f5f5dc; /* Beige */
+            border: 2px solid #5d4037;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+        }
+
+        .scroll-button:hover {
+            background-color: #a0522d; /* Sienna */
+            transform: translateY(-2px);
+        }
+
+        /* --- Tribes Section --- */
+        .tribes-section {
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 2px dashed #8b4513;
+        }
+
+        .tribes h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .tribe-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens if needed */
+            gap: 30px;
+        }
+
+        .tribe-card {
+            background-color: #faf0e6; /* Linen - for card background */
+            border: 2px solid #8b4513; /* SaddleBrown border */
+            padding: 25px;
+            width: 30%;
+            min-width: 280px; /* Minimum width for cards */
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+            text-align: left;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tribe-image-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .tribe-image {
+            width: 90%;
+            height: auto;
+            border: 2px solid #8b4513;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .tribe-image:hover {
+            transform: scale(1.03);
+        }
+
+        .tribe-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tribe-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #5d4037;
+            margin-top: 0;
+            border-bottom: 1px solid #a0522d; /* Sienna */
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .tribe-card p {
+            font-family: 'Spectral SC', serif;
+            font-size: 1rem;
+            color: #4e342e; /* Darker brown for card text */
+        }
+
+        /* --- Conquest Section --- */
+        .conquest-section {
+            padding: 60px 0;
+            border-top: 2px dashed #8b4513;
+            border-bottom: 2px dashed #8b4513;
+        }
+
+        .conquest h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .conquest-content {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .conquest-column {
+            flex: 1;
+            background-color: #faf0e6;
+            padding: 20px;
+            border: 1px solid #ccaa88; /* Lighter brown border for newspaper column feel */
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .conquest-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #8b4513;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+
+        .conquest-column p {
+            text-align: justify;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.95rem;
+            text-indent: 2em; /* Indent first line like old newspapers */
+        }
+
+        .map-placeholder {
+            width: 100%;
+            max-width: 500px; /* Adjust as needed */
+            height: 350px; /* Adjust as needed */
+            background-color: #ccc; /* Placeholder color */
+            border: 2px dashed #8b4513;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            color: #5d4037;
+        }
+
+        .map-container {
+            margin-top: 40px;
+            text-align: center;
+            border: 2px solid #8b4513;
+            padding: 20px;
+            background-color: rgba(230, 219, 199, 0.3);
+        }
+        
+        .conquest-map {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- Conflicts Section --- */
+        .conflicts-section {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 2px dashed #8b4513;
+            border-bottom: 2px dashed #8b4513;
+        }
+        
+        .conflicts-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .conflict-column {
+            flex: 1;
+            min-width: 300px;
+            margin: 0 15px 30px;
+            padding: 20px;
+            background-color: rgba(230, 219, 199, 0.3);
+            border: 1px solid #8b4513;
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        
+        .conflict-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 1px solid #8b4513;
+            padding-bottom: 10px;
+        }
+        
+        .conflict-column p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .conflict-image-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .conflict-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 250px;
+            border: 2px solid #8b4513;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .conflict-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .conflict-column p {
+            text-align: justify;
+            hyphens: auto;
+        }
+        
+        /* --- Archive Section --- */
+        .archive-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .archive h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .archive-quote {
+            font-family: 'Spectral SC', serif;
+            font-size: 1.3rem;
+            color: #795548;
+            margin-bottom: 40px;
+        }
+        
+        .quote-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .quote-content {
+            flex: 1;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .quote-image {
+            width: 150px;
+            text-align: center;
+        }
+        
+        .footer-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 180px;
+            filter: sepia(60%);
+            opacity: 0.85;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .quote-image.right .footer-image {
+            transform: scale(0.9); /* Шаман меньше на 0.1 */
+        }
+        
+        .footer-image:hover {
+            transform: scale(1.05);
+            opacity: 1;
+            filter: sepia(30%);
+        }
+        
+        .quote-image.right .footer-image:hover {
+            transform: scale(0.95); /* Сохраняем масштаб 0.9 при наведении, но добавляем небольшое увеличение */
+        }
+
+        .archive-list {
+            list-style: none;
+            padding: 0;
+            display: inline-block; /* Center the list */
+            text-align: left;
+        }
+
+        .archive-list li {
+            margin-bottom: 15px;
+        }
+
+        .archive-list a {
+            color: #8b4513; /* SaddleBrown for links */
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            border-bottom: 1px dotted #8b4513;
+            transition: color 0.3s;
+        }
+
+        .archive-list a:hover {
+            color: #a0522d; /* Sienna */
+        }
+
+        .back-to-top {
+            margin-top: 40px;
+        }
+        
+        /* Стили для подвала газеты */
+        .newspaper-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .footer-line {
+            height: 1px;
+            background-color: #8b4513;
+            margin: 15px auto;
+            width: 80%;
+        }
+        
+        .newspaper-slogan {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        
+        .newspaper-copyright {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.8rem;
+            margin: 5px 0;
+            color: #5d4037;
+        }
+
+        /* Responsive adjustments for very wide screens */
+        @media (min-width: 1600px) {
+            .container {
+                width: 80%; /* Increased from 70% to 80% */
+            }
+            .hero {
+                min-height: 70vh; /* Reduced for widescreen */
+            }
+            .hero h1 {
+                font-size: 5rem;
+                margin-bottom: 5px; /* Reduced spacing */
+            }
+            .hero h2 {
+                font-size: 2.5rem;
+                margin-bottom: 20px; /* Reduced spacing */
+            }
+            .tribe-card {
+                width: 28%;
+            }
+            .newsletter-banner {
+                margin-bottom: 20px; /* Reduced spacing */
+            }
+            .newsletter-banner .title {
+                font-size: 3rem;
+                letter-spacing: 10px;
+                margin: 5px 0; /* Reduced spacing */
+            }
+            .newsletter-banner .dots {
+                font-size: 1.8rem;
+                letter-spacing: 6px;
+            }
+            .newsletter-banner .line {
+                height: 3px;
+                margin: 5px 0; /* Reduced spacing */
+            }
+            .tribes-section {
+                padding-top: 40px; /* Reduced top padding */
+            }
+        }
+
+        @media (min-width: 2000px) { /* For 4K monitors */
+            .container {
+                width: 85%; /* Increased from 60% to 85% */
+                max-width: 2800px; /* Increased max-width */
+            }
+            body {
+                font-size: 1.1rem; /* Slightly larger base font for readability */
+            }
+            .hero {
+                min-height: 60vh; /* Reduced for 4K screens */
+            }
+            .hero h1 {
+                font-size: 6rem;
+                border-width: 4px;
+                padding: 15px 30px;
+                margin-bottom: 0; /* Reduced spacing */
+            }
+            .hero h2 {
+                font-size: 3rem;
+                margin-bottom: 15px; /* Reduced spacing */
+            }
+            .tribe-card h3 {
+                font-size: 2rem;
+            }
+            .tribe-card p {
+                font-size: 1.1rem;
+            }
+            .conquest-column p {
+                font-size: 1.05rem;
+            }
+            .archive-list a {
+                font-size: 1.2rem;
+            }
+            .newsletter-banner {
+                padding-top: 20px; /* Reduced from 30px */
+                margin-bottom: 20px; /* Reduced from 40px */
+            }
+            .newsletter-banner .title {
+                font-size: 3.5rem;
+                letter-spacing: 12px;
+                margin: 10px 0; /* Reduced from 15px */
+            }
+            .newsletter-banner .dots {
+                font-size: 2rem;
+                letter-spacing: 8px;
+            }
+            .newsletter-banner .line {
+                height: 4px;
+                margin: 5px 0; /* Reduced from 10px */
+            }
+            .scroll-button {
+                font-size: 1.4rem;
+                padding: 15px 30px;
+            }
+            .tribes-section, .conquest-section, .archive-section {
+                padding-top: 30px; /* Reduced padding between sections */
+                padding-bottom: 30px;
+            }
+        }
+
+        .photo-banner {
+            width: 50%; /* Уменьшено в два раза по ширине */
+            height: auto; /* Автоматическая высота для сохранения пропорций */
+            display: block;
+            margin: 0 auto; /* Центрирование по горизонтали */
+            border-top: 2px dashed #8b4513; /* Добавлена пунктирная граница сверху */
+            border-bottom: 1px solid #8b4513;
+            padding-top: 20px; /* Добавлен отступ сверху */
+        }
+        
+        /* Стили для погодной сводки */
+        .weather-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .weather-box {
+            border: 1px solid #8b4513;
+            padding: 10px 20px;
+            background-color: rgba(248, 240, 216, 0.7);
+            margin: 20px auto;
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .weather-box h3 {
+            font-family: 'Spectral SC', serif;
+            font-size: 1.1rem;
+            margin: 5px 0;
+            border-bottom: 1px solid #8b4513;
+            padding-bottom: 5px;
+        }
+        
+        .weather-box p {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.9rem;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+        
+        /* Декоративный разделитель */
+        .decorative-separator {
+            display: flex;
+            align-items: center;
+            width: 70%;
+            margin: 15px auto;
+        }
+        
+        .separator-line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: #8b4513;
+        }
+        
+        .separator-ornament {
+            margin: 0 15px;
+            font-size: 1.2rem;
+            color: #8b4513;
+        }
+    </style>
+</head>
+<body>
+    <!-- Вертикальные линии по бокам страницы -->
+    <div class="vertical-lines left"></div>
+    <div class="vertical-lines right"></div>
+    
+    <!-- Верхняя горизонтальная рамка -->
+    <div class="newspaper-frame">
+        <div class="thin-line"></div>
+        <div class="thin-line"></div>
+    </div>
+    
+    <!-- Social Media Corner -->
+    <div class="social-corner">
+        <a href="https://x.com/home" target="_blank" class="social-link">
+            <img src="img/twitter.png" alt="Twitter/X" class="social-icon">
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="newsletter-banner">
+                <div class="newspaper-metadata">
+                    <div class="issue-number">VOL. XXIV &bull; ISSUE 217</div>
+                    <div class="newspaper-price">PRICE: 5 CENTS</div>
+                </div>
+                <div class="line"></div>
+                <div class="dots">|||||||||||||||||||||||</div>
+                <div class="title"><img src="img/revi.png" alt="Revolver icon" class="banner-icon left-icon"> DAILY NEWSLETTER <img src="img/plemya.png" alt="Tribe icon" class="banner-icon right-icon"></div>
+                <div class="dots">|||||||||||||||||||||||</div>
+                <div class="line"></div>
+                <div class="newspaper-date">SUNDAY, JUNE 12, 1873</div>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="#tribes" class="nav-link">Tribes</a>
+                <a href="#conquest" class="nav-link">Conquest</a>
+                <a href="#conflicts" class="nav-link">Conflicts</a>
+                <a href="#archive" class="nav-link">Archive</a>
+            </nav>
+            <h1>THE FRONTIER TIMES — 1873</h1>
+            <h2>The Conquest of the West and the Fate of its Native Peoples</h2>
+            <a href="#tribes" class="scroll-button" id="scrollDownButton">Browse the Chronicle</a>
+        </div>
+    </section>
+
+    <!-- Weather and Photo Banner -->
+    <div class="weather-section">
+        <div class="weather-box">
+            <h3>WEATHER REPORT</h3>
+            <p>CLEAR SKIES OVER THE TERRITORY<br>HIGH: 78°F - LOW: 52°F<br>WIND: WEST AT 10 MPH</p>
+        </div>
+        <img src="img/photoban.jpg" alt="Historical Western Landscape" class="photo-banner">
+        <div class="decorative-separator">
+            <div class="separator-line"></div>
+            <div class="separator-ornament">&#10059;</div>
+            <div class="separator-line"></div>
+        </div>
+    </div>
+
+    <!-- Tribes Section -->
+    <section id="tribes" class="tribes-section">
+        <div class="container">
+            <h2>Tribes of the Plains and Beyond</h2>
+            <div class="tribe-cards">
+                <div class="tribe-card">
+                    <h3>Apache</h3>
+                    <p>Known for their fierce resistance and skilled warriors, the Apache tribes inhabited the Southwest. They were masters of desert survival and guerrilla warfare, challenging both Mexican and U.S. expansion for decades.</p>
+                    <div class="tribe-image-container">
+                        <img src="img/Apache.jpg" alt="Apache Tribe" class="tribe-image">
+                    </div>
+                </div>
+                <div class="tribe-card">
+                    <h3>Sioux (Lakota, Dakota, Nakota)</h3>
+                    <p>One of the largest and most powerful tribal groups of the Great Plains. The Sioux were central to the Plains Indian Wars, with notable leaders like Sitting Bull and Crazy Horse, fighting to preserve their way of life and bison-hunting grounds.</p>
+                    <div class="tribe-image-container">
+                        <img src="img/Sioux.jpg" alt="Sioux Tribe" class="tribe-image">
+                    </div>
+                </div>
+                <div class="tribe-card">
+                    <h3>Cherokee</h3>
+                    <p>Originally from the Southeastern Woodlands, the Cherokee Nation adopted many European-American customs. Despite this, they were forcibly removed in the tragic "Trail of Tears" to Indian Territory (present-day Oklahoma).</p>
+                    <div class="tribe-image-container">
+                        <img src="img/Cherokee.jpg" alt="Cherokee Tribe" class="tribe-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conquest and Loss Section -->
+    <section id="conquest" class="conquest">
+        <div class="container">
+            <h2>The March of Expansion & The Echo of Loss</h2>
+            <div class="conquest-content">
+                <div class="conquest-column">
+                    <h3>Manifest Destiny & The Settler's Push</h3>
+                    <p>The 19th century was dominated by the idea of "Manifest Destiny," the belief that the United States was divinely ordained to expand its dominion and spread democracy across the North American continent. This ideology fueled westward expansion, encouraged by legislation like the Homestead Act of 1862, which offered free land to settlers. Waves of pioneers, prospectors, and railroad builders surged west, transforming the landscape and irrevocably altering the lives of Native American populations.</p>
+                </div>
+                <div class="conquest-column">
+                    <h3>The Trail of Tears & Enduring Scars</h3>
+                    <p>Among the most heart-wrenching chapters of this era was the forced displacement of Native American tribes. The "Trail of Tears" refers specifically to the Cherokee removal in the 1830s, but similar forced migrations affected many other tribes. Stripped of their ancestral lands, thousands perished from disease, starvation, and exposure during these brutal journeys. The loss of land, culture, and life left deep and lasting scars on indigenous communities, a somber counterpoint to the narrative of American progress.</p>
+                </div>
+            </div>
+            <div class="map-container">
+                <img src="img/map.jpg" alt="Historical Map of the American West" class="conquest-map">
+            </div>
+        </div>
+    </section>
+
+    <!-- Conflicts Section -->
+    <section id="conflicts" class="conflicts-section">
+        <div class="container">
+            <h2>Conflicts and Resistance</h2>
+            <div class="conflicts-content">
+                <div class="conflict-column">
+                    <h3>The Battle of Little Bighorn</h3>
+                    <p>On June 25, 1876, in the eastern Montana Territory, the combined forces of Lakota, Northern Cheyenne, and Arapaho warriors achieved a stunning victory against the 7th Cavalry Regiment of the U.S. Army. Led by war chiefs Crazy Horse and Chief Gall, with spiritual leader Sitting Bull, the Native forces completely overwhelmed Lieutenant Colonel George Armstrong Custer's battalion.</p>
+                    <div class="conflict-image-container">
+                        <img src="img/Little_Bighorn.jpg" alt="The Battle of Little Bighorn" class="conflict-image">
+                    </div>
+                    <p>This battle, known to the Lakota as the Battle of the Greasy Grass, resulted in the annihilation of five companies of U.S. soldiers, including Custer himself. While a momentous victory for the Native Americans, it ultimately intensified the U.S. government's resolve to subdue the Plains tribes and confine them to reservations, leading to increased military campaigns against Indigenous resistance.</p>
+                </div>
+                <div class="conflict-column">
+                    <h3>The Ghost Dance Movement</h3>
+                    <p>In 1890, as Native American tribes faced the devastating reality of reservation life, a spiritual movement known as the Ghost Dance spread rapidly across the Plains. Founded on the prophecies of the Paiute spiritual leader Wovoka, the movement promised that performing the Ghost Dance would reunite Indigenous people with their ancestors, restore their traditional lands, and cause the white settlers to disappear.</p>
+                    <div class="conflict-image-container">
+                        <img src="img/Ghost_Dance.jpg" alt="The Ghost Dance Movement" class="conflict-image">
+                    </div>
+                    <p>U.S. authorities, alarmed by the growing movement, banned the practice on many reservations. This tension culminated in the Wounded Knee Massacre on December 29, 1890, when U.S. troops opened fire on a band of Lakota, killing approximately 300 men, women, and children. This tragedy is often considered the symbolic end of Native American armed resistance to U.S. expansion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Archive Section -->
+    <section id="archive" class="archive-section">
+        <div class="container">
+            <div class="quote-container">
+                <div class="quote-image left">
+                    <img src="img/cowboy.png" alt="Cowboy" class="footer-image">
+                </div>
+                <div class="quote-content">
+                    <h2>"History is the dust on time's saddle."</h2>
+                    <p class="archive-quote">- Anonymous Proverb of the West</p>
+                </div>
+                <div class="quote-image right">
+                    <img src="img/shaman.png" alt="Shaman" class="footer-image">
+                </div>
+            </div>
+            <ul class="archive-list">
+                <li><a href="#" target="_blank">Trail of Tears Archive (National Park Service)</a></li>
+                <li><a href="#" target="_blank">19th Century Maps (Library of Congress)</a></li>
+                <li><a href="#" target="_blank">Documents & Photos of the Era (National Archives)</a></li>
+                <li><a href="#" target="_blank">Native American Histories (Smithsonian)</a></li>
+            </ul>
+            <div class="back-to-top">
+                <a href="#hero" class="scroll-button" id="scrollTopButton">Back to Top</a>
+            </div>
+            <div class="newspaper-footer">
+                <div class="footer-line"></div>
+                <p class="newspaper-slogan">"TRUTH IN EVERY WORD, HISTORY IN EVERY PAGE"</p>
+                <p class="newspaper-copyright">THE FRONTIER TIMES PUBLISHING CO. &bull; ESTABLISHED 1865 &bull; DENVER, COLORADO TERRITORY</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Нижняя горизонтальная рамка -->
+    <div class="newspaper-frame">
+        <div class="thin-line"></div>
+        <div class="thin-line"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll for navigation buttons
+            const scrollDownButton = document.getElementById('scrollDownButton');
+            const scrollTopButton = document.getElementById('scrollTopButton');
+            const tribesSection = document.getElementById('tribes');
+            const heroSection = document.getElementById('hero');
+
+            if (scrollDownButton && tribesSection) {
+                scrollDownButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    tribesSection.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            if (scrollTopButton && heroSection) {
+                scrollTopButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    heroSection.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            // Intersection Observer for tribe card animations
+            const tribeCards = document.querySelectorAll('.tribe-card');
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of item is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            tribeCards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+
+</body>
+</html>
